@@ -1,5 +1,5 @@
-#include "server.hpp"
-#include "utilities.hpp"
+#include "server/server.hpp"
+#include "utils/utilities.hpp"
 #include <algorithm>
 #include <dirent.h>
 #include <errno.h>

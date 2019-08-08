@@ -1,7 +1,7 @@
 #ifndef __ROUTE__
 #define __ROUTE__
-#include "request.hpp"
-#include "response.hpp"
+#include "utils/request.hpp"
+#include "utils/response.hpp"
 #include <string>
 
 class RequestHandler;

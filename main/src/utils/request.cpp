@@ -1,5 +1,5 @@
-#include "request.hpp"
-#include "utilities.hpp"
+#include "utils/request.hpp"
+#include "utils/utilities.hpp"
 #include <fstream>
 #include <iostream>
 #include <map>

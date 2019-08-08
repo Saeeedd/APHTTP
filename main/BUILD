@@ -1,14 +1,14 @@
 cc_library(
     name = "aphttp",
     srcs = glob([
-            "src/*",
-            "include/*"
+            "src/**",
+            "include/**"
     ]),
 
     includes = [
             "include",
     ],
 
-    hdrs = glob(["include/*"]),
+    hdrs = glob(["include/**"]),
     visibility = ["//visibility:public"],
 )

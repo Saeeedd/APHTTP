@@ -1,5 +1,5 @@
-#include "route.hpp"
-#include "server.hpp"
+#include "server/route.hpp"
+#include "server/server.hpp"
 
 using namespace std;
 
