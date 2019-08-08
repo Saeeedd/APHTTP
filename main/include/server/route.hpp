@@ -1,13 +1,13 @@
 #ifndef __ROUTE__
 #define __ROUTE__
-#include "../utils/include.hpp"
-#include "../utils/request.hpp"
-#include "../utils/response.hpp"
+#include "request.hpp"
+#include "response.hpp"
 #include <string>
 
 class RequestHandler;
 
-class Route {
+class Route
+{
 private:
   Method method;
   std::string path;

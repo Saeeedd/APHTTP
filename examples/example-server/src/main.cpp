@@ -6,9 +6,11 @@
 
 using namespace std;
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   srand(time(NULL)); // for rand
-  try {
+  try
+  {
     MyServer server(argc > 1 ? atoi(argv[1]) : 5000);
     server.setNotFoundErrPage("static/404.html");
     server.get("/login", new ShowPage("static/logincss.html"));
@@ -20,7 +22,9 @@ int main(int argc, char **argv) {
     server.get("/", new ShowPage("static/home.html"));
     server.get("/colors", new ColorHandler("template/colors.html"));
     server.run();
-  } catch (Server::Exception e) {
+  }
+  catch (Server::Exception e)
+  {
     cerr << e.getMessage() << endl;
   }
 }

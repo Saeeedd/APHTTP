@@ -1,5 +1,5 @@
 #include "request.hpp"
-#include "../utils/utilities.hpp"
+#include "utilities.hpp"
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -7,7 +7,8 @@
 
 using namespace std;
 
-Request::Request(string _method) {
+Request::Request(string _method)
+{
   if (_method == "GET")
     method = GET;
   if (_method == "POST")
@@ -28,31 +29,37 @@ Method Request::getMethod() { return method; }
 
 void Request::setMethod(Method _method) { method = _method; }
 
-void Request::setQueryParam(string key, string value, bool encode) {
+void Request::setQueryParam(string key, string value, bool encode)
+{
   query[key] = encode ? urlEncode(value) : value;
 }
 
-void Request::setBodyParam(string key, string value, bool encode) {
+void Request::setBodyParam(string key, string value, bool encode)
+{
   body[key] = encode ? urlEncode(value) : value;
 }
 
-void Request::setHeader(string key, string value, bool encode) {
+void Request::setHeader(string key, string value, bool encode)
+{
   headers[key] = encode ? urlEncode(value) : value;
 }
 
-string Request::getBody() {
+string Request::getBody()
+{
   string bs = "";
   for (auto it = body.begin(); !body.empty() && it != body.end(); it++)
     bs += it->first + "=" + it->second + "&";
   return bs;
 }
 
-string Request::getSessionId() {
+string Request::getSessionId()
+{
   string cookie = getHeader("cookie");
   if (cookie == "")
     return "";
   vector<string> v = split(cookie, ";");
-  for (string kv : v) {
+  for (string kv : v)
+  {
     vector<string> k = split(kv, "=");
     if (k[0] == "sessionId")
       return k[1];
@@ -60,7 +67,8 @@ string Request::getSessionId() {
   return "";
 }
 
-void Request::log() {
+void Request::log()
+{
   const string NC = "\033[0;39m";
   const string K = "\033[1m";
   const string H = "\033[33;1m";
@@ -87,22 +95,26 @@ void Request::log() {
   cerr << log << endl;
 }
 
-cimap Request::getHeaders() {
+cimap Request::getHeaders()
+{
   vector<string> res;
   for (map<string, string>::iterator i = headers.begin();
-       !headers.empty() && i != headers.end(); i++) {
+       !headers.empty() && i != headers.end(); i++)
+  {
     res.push_back(i->first);
     res.push_back(i->second);
   }
   return headers;
 }
 
-string Request::getQueryString() {
+string Request::getQueryString()
+{
   if (query.empty())
     return "";
   string res = "?";
   for (map<string, string>::iterator i = query.begin();
-       !query.empty() && i != query.end(); i++) {
+       !query.empty() && i != query.end(); i++)
+  {
     res += i->first;
     res += "=";
     res += i->second;
@@ -111,25 +123,29 @@ string Request::getQueryString() {
   return res;
 }
 
-string Request::getHeadersString() {
+string Request::getHeadersString()
+{
   string headerString = "";
   for (auto it = headers.begin(); !headers.empty() && it != headers.end(); it++)
     headerString += it->first + "=" + it->second + "&";
   return headerString;
 }
 
-void Request::setHeaders(string _headers) {
+void Request::setHeaders(string _headers)
+{
   headers = getCimapFromString(_headers);
 }
 
-void Request::setQuery(std::string _query) {
+void Request::setQuery(std::string _query)
+{
   _query = _query.substr(1);
   query = getCimapFromString(_query);
 }
 
 void Request::setBody(std::string _body) { body = getCimapFromString(_body); }
 
-void Request::serializeToFile(Request *req, string filePath) {
+void Request::serializeToFile(Request *req, string filePath)
+{
   string reqString = to_string(req->getMethod());
   reqString += "\n";
   reqString += req->getPath();
@@ -142,9 +158,11 @@ void Request::serializeToFile(Request *req, string filePath) {
   writeToFile(reqString, filePath);
 }
 
-void Request::deserializeFromFile(Request *req, string filePath) {
+void Request::deserializeFromFile(Request *req, string filePath)
+{
   vector<string> fields = tokenize(readFile(filePath), '\n');
-  switch (fields.size()) {
+  switch (fields.size())
+  {
   case 5:
     req->setQuery(fields[4]);
   case 4:

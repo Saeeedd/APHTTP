@@ -1,12 +1,13 @@
 #ifndef __RESPONSE__
 #define __RESPONSE__
-#include "../utils/include.hpp"
-#include "../utils/utilities.hpp"
+#include "include.hpp"
+#include "utilities.hpp"
 #include <string>
 
 const std::string SERVER_NAME = "AP HTTP Server";
 
-class Response {
+class Response
+{
 public:
   Response(int code = 200);
   std::string print(int &);
